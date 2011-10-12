@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    
+    <title>Nivo Gallery Demo</title>
+    
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../nivo-gallery.css" type="text/css" media="screen" />
+    
+    <!--[if IE]>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<script type="text/javascript" src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="scripts/modernizr-1.7.min.js"></script>
+</head>
+<body>
+
+    <div id="wrapper">
+
+        <div id="gallery" class="nivoGallery">
+            <ul>
+                <li data-title="Lorem ipsum 1" data-caption="dolor sit amet, consectetur adipiscing elit"><img src="images/1.jpg" alt="" /></li>
+                <li data-title="Lorem ipsum 2" data-caption="dolor sit amet, consectetur adipiscing elit"><img src="images/2.jpg" alt="" /></li>
+                <li data-title="Lorem ipsum 3" data-caption="dolor sit amet, consectetur adipiscing elit"><img src="images/3.jpg" alt="" /></li>
+                <li data-title="Lorem ipsum 4" data-caption="dolor sit amet, consectetur adipiscing elit"><img src="images/4.jpg" alt="" /></li>
+                <li data-type="html" data-title="Lorem ipsum 5" data-caption="dolor sit amet, consectetur adipiscing elit">
+                    <h1>Heading</h1>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                </li>
+                <li data-type="video" data-title="Vimeo Video">
+                    <iframe src="http://player.vimeo.com/video/29950141?portrait=0&amp;color=ffffff" width="670" height="377" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+                </li>
+                <li data-type="video" data-title="YouTube Video">
+                    <iframe width="560" height="315" src="http://www.youtube.com/embed/72hTSFkYVAo?wmode=opaque" frameborder="0" allowfullscreen></iframe>
+                </li>
+                <li data-type="video" data-title="HTML5 Video">
+                    <video width="700" height="390" controls="control" preload="none"> 
+                        <source src="http://mediaelementjs.com/media/echo-hereweare.mp4" type="video/mp4" /> 
+                        <source src="http://mediaelementjs.com/media/echo-hereweare.webm" type="video/webm" /> 
+                        <source src="http://mediaelementjs.com/media/echo-hereweare.ogv" type="video/ogg" /> 
+                    </video>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="../jquery.nivo.gallery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#gallery').nivoGallery();
+    });
+    </script>
+</body>
+</html>
