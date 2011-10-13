@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Gallery v0.5
+ * jQuery Nivo Gallery v0.6
  * http://dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
@@ -34,9 +34,10 @@
     color:#fff;
 }
 .nivoGallery ul img {
-    display:block;
-    margin:0 auto;
     height:100%;
+    position:absolute;
+    top:0;
+    left:50%;
     -ms-interpolation-mode:bicubic;
 }
 

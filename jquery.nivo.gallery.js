@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Gallery v0.5
+ * jQuery Nivo Gallery v0.6
  * http://dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
@@ -11,15 +11,19 @@
 
 (function($) {
 
-    $.nivoGallery = function(element, options) {
+    $.nivoGallery = function(element, options){
 
         var defaults = {
             pauseTime: 3000,
-            animSpeed: 200,
+            animSpeed: 300,
             effect: 'fade',
             startPaused: false,
             directionNav: true,
-            progressBar: true
+            progressBar: true,
+            galleryLoaded: function(){},
+            beforeChange: function(index, slide, paused){},
+            afterChange: function(index, slide, paused){},
+            galleryEnd: function(){}
         }
         
         var global = {
@@ -39,7 +43,7 @@
         var $element = $(element),
              element = element;
 
-        plugin.init = function() {
+        plugin.init = function(){
             plugin.settings = $.extend({}, defaults, options);
             
             setupGallery();
@@ -82,6 +86,13 @@
             return output;
         }
         
+        var centerSlide = function(){
+            var thisSlide = $(global.slides[global.currentSlide]);
+            if(thisSlide.attr('data-type') != 'html' && thisSlide.attr('data-type') != 'video'){
+                thisSlide.find('img:first').css('margin-left','-'+ thisSlide.find('img:first').width() / 2 +'px');
+            }
+        }
+        
         var runTimeout = function(){
             clearTimeout(global.timer);
             if(plugin.settings.progressBar){ 
@@ -118,7 +129,8 @@
                 var img = new Image();
                 $(img).load(function(){
                     $element.find('.nivoGallery-slides').append(global.slides[idx]);
-                    $(global.slides[idx]).fadeIn(200);
+                    $(global.slides[idx]).fadeIn(plugin.settings.animSpeed);
+                    centerSlide();
                     
                     if(idx == 0){
                         $element.trigger('galleryloaded');
@@ -149,16 +161,24 @@
         
         var runTransition = function(direction){
             if(global.animating) return;
+            plugin.settings.beforeChange.call(this, global.currentSlide, $(global.slides[global.currentSlide]), global.paused);
             
             if(plugin.settings.effect == 'fade'){
+                var galleryEnd = false;
                 global.animating = true;
                 $(global.slides[global.currentSlide]).fadeOut(plugin.settings.animSpeed, function(){
                     if(direction == 'prev'){
                         global.currentSlide--;
-                        if(global.currentSlide < 0) global.currentSlide = global.totalSlides - 1;
+                        if(global.currentSlide < 0){ 
+                            global.currentSlide = global.totalSlides - 1;
+                            galleryEnd = true;
+                        }
                     } else {
                         global.currentSlide++;
-                        if(global.currentSlide >= global.totalSlides) global.currentSlide = 0;
+                        if(global.currentSlide >= global.totalSlides){ 
+                            global.currentSlide = 0;
+                            galleryEnd = true;
+                        }
                     }
                     loadSlide(global.currentSlide, function(){
                         $element.find('.nivoGallery-count').text(setCount());
@@ -167,23 +187,47 @@
                         $(global.slides[global.currentSlide]).fadeIn(plugin.settings.animSpeed, function(){
                             global.animating = false;
                             runTimeout();
+                            plugin.settings.afterChange.call(this, global.currentSlide, $(global.slides[global.currentSlide]), global.paused);
+                            if(galleryEnd) plugin.settings.galleryEnd.call(this);
                         });
+                        centerSlide();
                     });
                 });
             }
         }
         
         /* Public Funcs */
-        plugin.play = function() {
+        plugin.play = function(){
             $element.find('.nivoGallery-play').addClass('playing');
             global.paused = false;
             runTimeout();
         }
         
-        plugin.pause = function() {
+        plugin.pause = function(){
             $element.find('.nivoGallery-play').removeClass('playing');
             global.paused = true;
             runTimeout();
+        }
+        
+        plugin.nextSlide = function(){
+            plugin.pause();
+            runTransition('next');
+        }
+        
+        plugin.prevSlide = function(){
+            plugin.pause();
+            runTransition('prev');
+        }
+        
+        plugin.goTo = function(idx){
+            if(idx == global.currentSlide || global.animating) return;
+            $(global.slides[global.currentSlide]).fadeOut(plugin.settings.animSpeed);
+            global.currentSlide = (idx - 1);
+            if(global.currentSlide < 0) global.currentSlide = global.totalSlides - 1;
+            if(global.currentSlide >= global.totalSlides - 1) global.currentSlide = global.totalSlides - 2;
+                        
+            plugin.pause();
+            runTransition('next');
         }
         
         /* Events */
@@ -195,6 +239,8 @@
             } else {
                 runTimeout();
             }
+            
+            plugin.settings.galleryLoaded.call(this);
         });
         
         $element.find('.nivoGallery-play').live('click', function(){
@@ -209,22 +255,22 @@
         });
         
         $element.find('.nivoGallery-prev').live('click', function(){
-        	plugin.pause();
-            runTransition('prev');
+        	plugin.prevSlide();
         });
         
         $element.find('.nivoGallery-next').live('click', function(){
-        	plugin.pause();
-            runTransition('next');
+        	plugin.nextSlide();
         });
         
         $element.find('.nivoGallery-fullscreen').live('click', function(){
             $element.toggleClass('fullscreen');
+            centerSlide();
         });
         
         $(document).keyup(function(e){
             if(e.keyCode == 27){
                 $element.removeClass('fullscreen');
+                centerSlide();
             }
         });
 
@@ -232,10 +278,10 @@
 
     }
 
-    $.fn.nivoGallery = function(options) {
+    $.fn.nivoGallery = function(options){
 
         return this.each(function() {
-            if (undefined == $(this).data('nivoGallery')) {
+            if (undefined == $(this).data('nivoGallery')){
                 var plugin = new $.nivoGallery(this, options);
                 $(this).data('nivoGallery', plugin);
             }
