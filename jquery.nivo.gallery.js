@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Gallery v0.6
+ * jQuery Nivo Gallery v0.7
  * http://dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
@@ -86,13 +86,6 @@
             return output;
         }
         
-        var centerSlide = function(){
-            var thisSlide = $(global.slides[global.currentSlide]);
-            if(thisSlide.attr('data-type') != 'html' && thisSlide.attr('data-type') != 'video'){
-                thisSlide.find('img:first').css('margin-left','-'+ thisSlide.find('img:first').width() / 2 +'px');
-            }
-        }
-        
         var runTimeout = function(){
             clearTimeout(global.timer);
             if(plugin.settings.progressBar){ 
@@ -130,7 +123,6 @@
                 $(img).load(function(){
                     $element.find('.nivoGallery-slides').append(global.slides[idx]);
                     $(global.slides[idx]).fadeIn(plugin.settings.animSpeed);
-                    centerSlide();
                     
                     if(idx == 0){
                         $element.trigger('galleryloaded');
@@ -190,7 +182,6 @@
                             plugin.settings.afterChange.call(this, global.currentSlide, $(global.slides[global.currentSlide]), global.paused);
                             if(galleryEnd) plugin.settings.galleryEnd.call(this);
                         });
-                        centerSlide();
                     });
                 });
             }
@@ -264,13 +255,11 @@
         
         $element.find('.nivoGallery-fullscreen').live('click', function(){
             $element.toggleClass('fullscreen');
-            centerSlide();
         });
         
         $(document).keyup(function(e){
             if(e.keyCode == 27){
                 $element.removeClass('fullscreen');
-                centerSlide();
             }
         });
 

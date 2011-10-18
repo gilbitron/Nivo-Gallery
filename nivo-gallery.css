@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Gallery v0.6
+ * jQuery Nivo Gallery v0.7
  * http://dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
@@ -12,11 +12,12 @@
 .nivoGallery {
     position:relative;
     background:#000 url(images/loading.gif) no-repeat 50% 50%;
-    width:700px;
-    height:300px;
+    width:100%; /* Width can be fixed px or dynamic % value */
+    height:400px; /* Height must be fixed px value */
+    margin-bottom:28px;
 }
 .nivoGallery.loaded {
-    background:#000;
+    background:#000; /* Remove the loading gif */
 }
 .nivoGallery ul {
     list-style:none;
@@ -34,10 +35,15 @@
     color:#fff;
 }
 .nivoGallery ul img {
-    height:100%;
-    position:absolute;
-    top:0;
-    left:50%;
+    display:block;
+    max-width:100%;
+    max-height:100%;
+    position:absolute; 
+    top:0; 
+    bottom:0; 
+    left:0; 
+    right:0;
+	margin:auto;
     -ms-interpolation-mode:bicubic;
 }
 
@@ -178,9 +184,9 @@
     position:fixed;
     top:0px;
     left:0px;
-    width:100%;
+    width:100% !important;
     max-width:100%;
-    height:100%;
+    height:100% !important;
     z-index:10000;
 }
 .nivoGallery.fullscreen .nivoGallery-caption {
@@ -203,4 +209,7 @@
     position:fixed;
     top:20px;
     right:20px;
+}
+.nivoGallery.fullscreen .nivoGallery-htmlwrap {
+    padding:90px 20px 20px 20px;
 }
