@@ -1,26 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
+{
+  "name": "Nivo Gallery",
+  "description": "The world's most awesome jQuery Image Gallery",
+  "version": "0.7",
+  "keywords": [
+    "jquery",
+    "image",
+    "gallery",
+    "nivo"
+  ],
+  "maintainers": [
+    {
+      "name": "Gilbert Pellegrom",
+      "email": "gilbert@dev7studios.com",
+      "web": "http://gilbert.pellegrom.me"
     }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
-
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-</body>
-</html>
+  ],
+  "demos": [
+    "http://nivogallery.dev7studios.com"
+  ],
+  "bugs": {
+    "web": "https://github.com/gilbitron/Nivo-Gallery/issues"
+  },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git://github.com/gilbitron/Nivo-Gallery.git/Nivo-Gallery.git"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "https://github.com/gilbitron/Nivo-Gallery/blob/master/license.txt"
+    }
+  ],
+  "homepage": "http://nivogallery.dev7studios.com"
+}
