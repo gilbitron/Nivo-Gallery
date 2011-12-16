@@ -15,6 +15,9 @@
       "web": "http://gilbert.pellegrom.me"
     }
   ],
+  "dependencies": {
+    "jquery": "1.5"
+  },
   "demos": [
     "http://nivogallery.dev7studios.com"
   ],
