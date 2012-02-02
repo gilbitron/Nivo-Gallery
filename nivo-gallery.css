@@ -164,7 +164,7 @@
     width:32px;
     height:28px;
     border:0;
-    background:url(images/fullscreen.png) no-repeat 50% 7px;
+    background:url(images/fullscreen.png) no-repeat 50% 5px;
     cursor:pointer;
     border-left:1px solid rgba(0,0,0,0.3);
 }
