@@ -1,5 +1,8 @@
 *** Nivo Slider Gallery Changelog ***
 
+2012.02.02 - version 0.7.1
+ * [Changed] Fullscreen icon
+
 2011.09.22 - version 0.7
  * [New] Added changelog.txt
  * [Changed] Made gallery react to responsive width

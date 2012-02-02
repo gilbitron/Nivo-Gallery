@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Gallery v0.7
+ * jQuery Nivo Gallery v0.7.1
  * http://dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
