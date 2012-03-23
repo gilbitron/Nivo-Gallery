@@ -215,7 +215,7 @@
             $(global.slides[global.currentSlide]).fadeOut(plugin.settings.animSpeed);
             global.currentSlide = (idx - 1);
             if(global.currentSlide < 0) global.currentSlide = global.totalSlides - 1;
-            if(global.currentSlide >= global.totalSlides - 1) global.currentSlide = global.totalSlides - 2;
+            if(global.currentSlide > global.totalSlides - 1) global.currentSlide = global.totalSlides - 2;
                         
             plugin.pause();
             runTransition('next');
